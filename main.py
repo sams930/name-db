@@ -55,6 +55,11 @@ while True:
         # atlasīt top 5 vārdus pēc populāritātes
         # https://www.w3schools.com/sql/sql_orderby.asp (ORDER BY)
         # https://www.w3schools.com/sql/sql_top.asp (LIMIT)
+        cursor.execute("SELECT name, nameFROM schools ORDER BY class_12 DESC LIMIT 5;")
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
+
         pass
     elif choice == '4':
         gender = input("Ievadi VĪRIETIS/SIEVIETE: ")
