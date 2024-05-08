@@ -1,4 +1,5 @@
 
+
 import sqlite3
 
 # Create or connect to the database
@@ -55,7 +56,7 @@ while True:
         # atlasīt top 5 vārdus pēc populāritātes
         # https://www.w3schools.com/sql/sql_orderby.asp (ORDER BY)
         # https://www.w3schools.com/sql/sql_top.asp (LIMIT)
-        cursor.execute("SELECT name, nameFROM schools ORDER BY class_12 DESC LIMIT 5;")
+        cursor.execute("SELECT * FROM names ORDER BY amount DESC LIMIT 5")
         result = cursor.fetchall()
         for row in result:
             print(row)
@@ -66,15 +67,28 @@ while True:
         # Parādīt kopējo vārdu skaitu pēc dzimuma
         # https://www.w3schools.com/sql/sql_count.asp (COUNT)
         # https://www.w3schools.com/sql/sql_where.asp (WHERE)
+        cursor.execute("SELECT SUM(amount) From names WHERE gender = ?",(gender,))
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
     elif choice == '5':
         gender = input("Ievadi VĪRIETIS/SIEVIETE: ")
         # Parādīt vidējo vārdu skaitu pēc dzimuma
         # https://www.w3schools.com/sql/sql_avg.asp (AVG)
         # https://www.w3schools.com/sql/sql_where.asp (WHERE)
+        cursor.execute("SELECT AVG(amount) From names WHERE gender = ?",(gender,))
+        result = cursor.fetchall()
+        for row in result:
+            print(row)       
     elif choice == '6':
         amount = input("Ievadi daudzumu: ")
         # Parādīt vārdus pēc daudzuma
         # https://www.w3schools.com/sql/sql_where.asp (WHERE)
+        cursor.execute("SELECT name, amount From names WHERE amount = ?",(amount,))
+        result = cursor.fetchall()
+        if result:
+            for row in result:
+                print(row)
     elif choice == '7':
         break
     else:
